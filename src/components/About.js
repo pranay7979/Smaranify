@@ -1,15 +1,143 @@
 import React from 'react';
+import car from './note.jpg';
 
-const About=()=>{
+export default function About() {
+  return (
+    <div className="about-wrapper container my-4 px-3">
+      <style>{`
 
-  return(
-    <div>
-      <h2>Introducing NoteStack - the ultimate productivity tool that empowers users to eﬀortlessly organize and collaborate on their digital notes. With a sleek user interface and powerful features, NoteStack revolutionizes the way you manage your notes. Stay organized, boost productivity, and collaborate seamlessly - all in one place. Experience the future of note-taking with NoteStack.
-</h2><br/> 
-      <h2>NoteStack is a dynamic digital note-taking solution designed to streamline and enhance the note-taking experience. This web-based platform oﬀers users the ability to create, organize, and manage their notes eiciently. With features such as user registration, secure login, note creation, editing, and deletion, NoteStack empowers individuals to harness the power of organized information.
-User data is safeguarded through encryption and regular backups, ensuring data security. NoteStack aims to revolutionize note-taking by providing an intuitive, user-friendly interface that facilitates seamless content management. As a versatile tool adaptable for personal and professional use, NoteStack represents a signiﬁcant leap forward in the realm of digital note-taking, promoting productivity and organization.
-</h2>
+      
+        .about-wrapper {
+          background-color: #f8f9fc;
+          border-radius: 16px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+          padding: 2rem 1.5rem;
+          max-width: 100%;
+        }
+
+        .about-heading {
+          font-size: 2.2rem;
+          font-weight: bold;
+          text-align: center;
+          color: #0d6efd;
+          margin-bottom: 2rem;
+        }
+
+        .accordion-button {
+          background-color: #ffffff !important;
+          color: #343a40 !important;
+          font-weight: 600;
+          border-radius: 8px !important;
+          box-shadow: none;
+        }
+
+        .accordion-button:hover {
+          background-color: #e9f2ff !important;
+        }
+
+        .accordion-body {
+          background-color: #f1f4f9;
+          border-radius: 8px;
+          padding: 1rem 1.2rem;
+        }
+
+        .accordion-body ul {
+          padding-left: 1rem;
+        }
+
+        .accordion-body li {
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
+          color: #444;
+        }
+
+       .image-section {
+    text-align: center;
+    margin-top: 2.5rem;
+  }
+
+  .image-section img {
+    max-width: 100%;
+    width: 300px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease;
+  }
+
+  .image-section img:hover {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 576px) {
+    .image-section img {
+      width: 220px;
+    }
+  }
+        }
+
+      `}</style>
+
+      <h1 className="about-heading">🚀 Welcome to NoteStack</h1>
+
+      <div className="accordion" id="accordionExample">
+        {/* SECTION 1 */}
+        <div className="accordion-item mb-3">
+          <h2 className="accordion-header">
+            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+              💡 What is NoteStack?
+            </button>
+          </h2>
+          <div id="collapseOne" className="accordion-collapse collapse show">
+            <div className="accordion-body">
+              <ul>
+                <li>NoteStack is your all-in-one digital notebook for effortless note creation and management.</li>
+                <li>Designed to boost productivity by organizing your thoughts, ideas, and tasks in one place.</li>
+                <li>Accessible anywhere, anytime — experience the freedom of structured thinking.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* SECTION 2 */}
+        <div className="accordion-item mb-3">
+          <h2 className="accordion-header">
+            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+              📘 Key Features
+            </button>
+          </h2>
+          <div id="collapseTwo" className="accordion-collapse collapse">
+            <div className="accordion-body">
+              <ul>
+                <li>Create, edit, and delete notes instantly</li>
+                <li>Organize with tags: Personal, Professional, Reminders</li>
+                <li>Responsive across all devices</li>
+                <li>Visual UI with elegant card-based layout</li>
+                <li>Secure notes accessible after login</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* SECTION 3 */}
+        <div className="accordion-item mb-3">
+          <h2 className="accordion-header">
+            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+              🙌 Credits
+            </button>
+          </h2>
+          <div id="collapseThree" className="accordion-collapse collapse">
+            <div className="accordion-body">
+             NoteStack was proudly developed by :  <strong>  Pranay❤️ </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* IMAGE SECTION */}
+      <div className="image-section">
+        <img  id="image"src={car} alt="NoteStack App Preview" />
+      </div>
     </div>
-  )
+  );
 }
-export default About;

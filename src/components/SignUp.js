@@ -1,65 +1,92 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Signup.css'; // 👈 Create this CSS file
 
 const Signup = (props) => {
-    const [credentials, setCredentials] = useState({name:"", email: "", password: "", cpassword: ""}) 
-    let history = useNavigate();
+  const [credentials, setCredentials] = useState({
+    name: "", email: "", password: "", cpassword: ""
+  });
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const {name, email, password} = credentials;
-        try {
-            const response = await fetch("http://localhost:5000/api/auth/createuser", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({name, email, password})
-            });
-            const json = await response.json();
-            console.log(json);
-            if (response.ok) {
-                localStorage.setItem('token', json.token); 
-                history("/");
-                props.showAlert("Account created successfully", "success");
-            } else {
-                props.showAlert("Invalid Credentials", "danger");
-            }
-        } catch (error) {
-            console.error('Error signing up:', error);
-            props.showAlert("Failed to sign up. Please try again later", "danger");
-        }
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, password, cpassword } = credentials;
+    if (password !== cpassword) {
+      props.showAlert("Passwords do not match", "danger");
+      return;
     }
 
-    const onChange = (e) => {
-        setCredentials({...credentials, [e.target.name]: e.target.value});
-    }
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ name, email, password })
+    });
 
-    return (
-        <div className='container'>
-            <h1>Create your Account</h1>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Name</label>
-                    <input type="text" className="form-control" minLength={3} id="name" name='name' onChange={onChange} aria-describedby="emailHelp" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" name="email" onChange={onChange} aria-describedby="emailHelp" />     
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" onChange={onChange} minLength={5} name='password' required id="password" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-                    <input type="password" className="form-control"  onChange={onChange}  name="cpassword" required id="cpassword" />
-                </div>
-               
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-        </div>
-    )
-}
+    const json = await response.json();
+    if (json.success) {
+      localStorage.setItem('token', json.authtoken);
+      props.showAlert("Account created successfully", "success");
+      navigate("/notes");
+    } else {
+      props.showAlert("Invalid Credentials", "danger");
+    }
+  };
+
+  const onChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div className="signup-container">
+      <div className="signup-box">
+        <h2>Sign Up</h2>
+        <p className="subtitle">Create your account to start taking smart notes.</p>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="name"
+            value={credentials.name}
+            onChange={onChange}
+            placeholder="Full Name"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            value={credentials.email}
+            onChange={onChange}
+            placeholder="Email Address"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            value={credentials.password}
+            onChange={onChange}
+            placeholder="Password"
+            required
+            minLength={5}
+          />
+          <input
+            type="password"
+            name="cpassword"
+            value={credentials.cpassword}
+            onChange={onChange}
+            placeholder="Confirm Password"
+            required
+            minLength={5}
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+        <p className="login-link">
+          Already have an account? <a href="/login">Log in</a>
+        </p>
+      </div>
+    </div>
+  );
+};
 
 export default Signup;

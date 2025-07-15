@@ -1,0 +1,58 @@
+/* Navbar.css */
+
+.custom-navbar {
+  background: linear-gradient(to right, #343a40, #212529);
+  padding: 0.7rem 1.5rem;
+}
+
+.brand-text {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: white !important;
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  color: #ffffff;
+  margin-left: 1rem;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ffc107;
+  transform: scale(1.05);
+}
+
+.nav-link.active {
+  border-bottom: 2px solid #ffc107;
+  padding-bottom: 2px;
+}
+
+.login-btn,
+.signup-btn {
+  border: 1px solid #ffc107;
+  border-radius: 25px;
+  padding: 6px 15px;
+  margin-left: 10px;
+  color: #ffc107;
+  transition: 0.3s;
+}
+
+.login-btn:hover,
+.signup-btn:hover {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.logout-btn {
+  border: 1px solid #ffffff;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #ffc107;
+  color: #212529;
+}

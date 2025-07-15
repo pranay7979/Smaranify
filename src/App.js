@@ -9,7 +9,8 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { useState } from 'react';
 import Alert from './components/Alert';
-import Land from './components/Land';
+import Notes from './components/Notes';
+import Landing from './components/shri/Landing';
 
 function App() {
   const [alert,setAlert]=useState(null);
@@ -32,11 +33,12 @@ function App() {
       <Alert alert={alert}/>
       <div className="container my-3">
       <Routes>
-      <Route path="/Land" element={<Land  />} />
-      <Route path="/" element={<Home showAlert={showAlert} />} />
         <Route exact path="/About" element={<About />}></Route>
         <Route exact  path="/login" element={<Login showAlert={showAlert}/>}> </Route>
         <Route exact  path="/signup" element={<SignUp showAlert={showAlert}/>}> </Route>
+        <Route exact path="/" element={<Landing />} />
+        <Route exact path="/notes" element={<Notes/>}/>
+
       </Routes>
       </div>
       </Router>

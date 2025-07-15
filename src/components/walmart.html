@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartPrice Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8faff; /* Very light blue-white */
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background: #4a90e2; /* Deep blue */
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8em;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 8px 0 0;
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+      gap: 30px;
+    }
+    .nav-buttons button {
+      padding: 14px 30px;
+      font-size: 1.15em;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      background: #ffffff;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+      transition: all 0.3s ease;
+      color: #4a90e2; /* Blue */
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-buttons button:hover {
+      background: #4a90e2; /* Inverted hover */
+      color: #fff;
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    }
+    .panel {
+      display: none;
+      padding: 30px;
+      max-width: 1280px;
+      margin: 0 auto 50px auto;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    .visible {
+      display: block;
+    }
+    h2 {
+      text-align: center;
+      color: #2c5ba6; /* Darker blue for headings */
+      margin-bottom: 40px;
+      font-size: 2.4em;
+      letter-spacing: 1px;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 4px;
+      background: #4a90e2; /* Blue underline */
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -15px;
+      border-radius: 2px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .product-card {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid #e0e6f0; /* Subtle blue-white border */
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    }
+    .product-card img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    .product-card h4 {
+      margin: 10px 0 12px;
+      color: #333;
+      font-size: 1.5em;
+    }
+    .product-card p {
+      margin: 4px 0;
+      color: #555;
+      font-size: 1.05em;
+    }
+    .product-card button {
+      background: #4a90e2; /* Blue button */
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-size: 1.0em;
+      margin-top: 20px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+      transition: background 0.3s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .product-card button:hover {
+      background: #3a7bc4; /* Darker blue on hover */
+      transform: translateY(-2px);
+    }
+    .product-card label {
+      margin-top: 10px;
+      font-size: 0.95em;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .product-card input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+
+    .admin-controls {
+      background: #f0f5fa; /* Lighter blue-white for controls */
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      align-items: end;
+      border: 1px solid #d4e0ee; /* Subtle border */
+    }
+    .admin-controls label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #444;
+      font-size: 0.95em;
+    }
+    .admin-controls select,
+    .admin-controls input[type="number"],
+    .admin-controls input[type="range"] {
+      width: calc(100% - 20px);
+      padding: 12px;
+      border: 1px solid #b0c2da; /* Blue border for inputs */
+      border-radius: 10px;
+      margin-bottom: 10px;
+      font-size: 1em;
+      background-color: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .admin-controls select:focus,
+    .admin-controls input[type="number"]:focus,
+    .admin-controls input[type="range"]:focus {
+      border-color: #4a90e2;
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+      outline: none;
+    }
+    .admin-controls button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1em;
+      background: #2c5ba6; /* Darker blue button */
+      color: white;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .admin-controls button:hover {
+      background: #234c8a; /* Even darker blue on hover */
+      transform: translateY(-2px);
+    }
+    .admin-extras {
+      display: flex;
+      gap: 30px;
+      margin-top: 50px;
+    }
+    .admin-extras div {
+      flex: 1;
+      background: #f0f5fa;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid #d4e0ee;
+    }
+    #sort
+    {
+        padding: 15px;
+        border-radius: 15px;
+        border-color: blue;
+        background-color:#f0f5fa;
+        max-width: fit-content;
+    }
+    .admin-extras h2 {
+      margin-top: 0;
+      color: #2c5ba6;
+      font-size: 1.8em;
+      text-align: left;
+      margin-bottom: 25px;
+    }
+    .admin-extras h2::after {
+        left: 0;
+        transform: none;
+    }
+    .admin-extras ul {
+      list-style: none;
+      padding: 0;
+    }
+    .admin-extras ul li {
+      background: #e6edf7; /* Lighter list item background */
+      margin-bottom: 10px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      color: #444;
+      font-size: 1em;
+      border: 1px solid #d4e0ee;
+    }
+    #userPurchases {
+      list-style: decimal;
+      padding-left: 30px;
+      margin-top: 30px;
+      background: #f0f5fa;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      border: 1px solid #d4e0ee;
+    }
+    #userPurchases li {
+      margin-bottom: 8px;
+      color: #444;
+      font-size: 1.05em;
+    }
+    h3 {
+      color: #2c5ba6;
+      font-size: 1.8em;
+      margin-top: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SmartPrice: Sustainable E-Commerce</h1>
+    <p>Reducing Wastage. Increasing Efficiency.</p>
+  </header>
+  <div class="nav-buttons">
+    <button id="adminBtn">Admin Panel</button>
+    <button id="userBtn">User Panel</button>
+  </div>
+
+  <div id="admin" class="panel visible">
+    <h2>Admin Panel - Manage Products & Dynamic Pricing</h2>
+    <div class="admin-controls">
+      <div>
+        <label for="seasonSelect">Season:</label>
+        <select id="seasonSelect">
+          <option value="spring">Spring</option>
+          <option value="summer">Summer</option>
+          <option value="fall">Fall</option>
+          <option value="winter">Winter</option>
+        </select>
+      </div>
+      <div>
+        <label for="demandMultiplier">Market Demand Multiplier: <span id="demandValue">1.0x</span></label>
+        <input type="range" min="0.5" max="2.0" step="0.1" value="1.0" id="demandMultiplier" oninput="document.getElementById('demandValue').innerText=this.value+'x'">
+      </div>
+      <div>
+        <label for="expiryThreshold">Expiry Threshold (days):</label>
+        <input type="number" id="expiryThreshold" value="15" min="1" max="365">
+      </div>
+      <div>
+        <button onclick="applyDynamicPricing()">Apply Dynamic Price Changes</button>
+      </div>
+     
+    </div>
+     <div id="sort">
+        <label>Filter by Category:</label>
+        <select onchange="renderProducts('admin', this.value)">
+          <option value="all">All</option>
+          <option value="fruits">Fruits</option>
+          <option value="groceries">Groceries</option>
+          <option value="electronics">Electronics</option>
+        </select>
+      </div>
+
+    <div class="product-grid" id="adminGrid"></div>
+    <div class="admin-extras">
+      <div>
+        <h2>Recycled Items</h2>
+        <ul id="recycleList"></ul>
+      </div>
+      <div>
+        <h2>Wasted Items</h2>
+        <ul id="wasteList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="user" class="panel">
+    <h2>User Panel - Shop Products</h2>
+    <div class="admin-controls" style="grid-template-columns: 1fr; max-width: 350px; margin: 20px auto;">
+      <label>Filter by Category:</label>
+      <select onchange="renderProducts('user', this.value)">
+        <option value="all">All</option>
+        <option value="fruits">Fruits</option>
+        <option value="groceries">Groceries</option>
+        <option value="electronics">Electronics</option>
+      </select>
+    </div>
+    <div class="product-grid" id="userGrid"></div>
+    <h3>Your Purchased Items:</h3>
+    <ul id="userPurchases"></ul>
+  </div>
+
+  <script>
+    // Base64 encoded images for categories
+    const categoryImages = {
+      fruits: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk5YmRkNyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiLz4KICA8cGF0aCBkPSJNMTEuMTMgNi4xM0E3LjIzIDcuMjMgMCAwIDEgMTcgOC41YTMuOTggMy45OCAwIDAgMC0xLjUxIDIuOTkgNi44OCA2Ljg4IDAgMCAxLTMuNTcgMy41NyAzLjk4IDMuOTggMCAwIDAtMi45OSA1LjUxIDcuMjMgNy4yMyAwIDAgMS0yLjM3LTUuMzYgNC4zMiA0LjMyIDAgMCAxLS43LTcuMTUgMi4wMiAyLjAyIDAgMCAxLS42OC0xLjMxYy41Mi0uNTQgMS4xLS45OCAxLjctMS4zMkExMS4xMyAxMS4xMyAwIDAgMSAxMS4xMyA2LjEzeiIvPgo8L3N2Zz4=', // Blue Apple icon
+      groceries: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk5YmRkNyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPGNpcmNsZSBjeD0iNyIgY3k9IjIyIiByPSIxIi8+CiAgPGNpcmNsZSBjeD0iMTciIGN5PSIyMiIgcj0iMSIvPgogIDxwYXRoIGQ9Ik0zIDJhMSAxIDAgMCAxIDEgMWgyYTYgNiAwIDAgMSAwIDEybDItNWgxMWEyIDIgMCAwIDAgMi0yVjNoLTJhMiAyIDAgMCAwLTIgMiAyIDIgMCAwIDEtMiAySDdBNCA0IDAgMCAwIDcgMTAiLz4KPC9zdmc+', // Blue Shopping Cart icon
+      electronics: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzk5YmRkNyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CiAgPHJlY3QgeD0iMyIgeT0iNCIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiByeD0iMiIvPgogIDJ+MHgyIDJzMCA5aDEwYTEwIDEwIDAgMCAwIDEwLTEwVjEwYTEwIDEwIDAgMCAwLTEwLTEwSDEyIi8+CiAgPHBhdGggZD0iTTEwIDl2NGgxLjVNMTAgMTJoMi4yNU0xMi40IDIwLjg1bDEuMzItNC4zMmExLjIxIDEuMjEgMCAwIDEgMi4wNi0uNzdsMS4wOC41NGEuODQuODQgMCAwIDAgMS4wOC0xLjU1bC0yLjEyLTEuMDZhMS4wNiAxLjA2IDAgMCAwLTEuNDYuMTkgMi4zMiAyLjMyIDAgMCAxLS45MyAxLjU4bC0uMTUuMDNMMTAuNCAxNy43bC0xLjUtMS41Ljg0LS44NE04LjU1IDYuMzRsMS41IDEtLjguODQvTTEwLjQgMTAuNGwxLjUtMS41Ljg0LS44NCIvPgo8L3N2Zz4=' // Blue Laptop icon
+    };
+
+    const products = [
+      { id: 1, name: 'Apple', category: 'fruits', price: 90, stock: 30, expiry: 10, image: categoryImages.fruits },
+      { id: 2, name: 'Banana', category: 'fruits', price: 30, stock: 25, expiry: 5, image: categoryImages.fruits },
+      { id: 3, name: 'Mango', category: 'fruits', price: 120, stock: 15, expiry: 20, image: categoryImages.fruits },
+      { id: 4, name: 'Orange', category: 'fruits', price: 60, stock: 40, expiry: 7, image: categoryImages.fruits },
+      { id: 5, name: 'Grapes', category: 'fruits', price: 100, stock: 20, expiry: 14, image: categoryImages.fruits },
+      { id: 6, name: 'Pineapple', category: 'fruits', price: 70, stock: 15, expiry: 12, image: categoryImages.fruits },
+      { id: 7, name: 'Papaya', category: 'fruits', price: 45, stock: 18, expiry: 8, image: categoryImages.fruits },
+      { id: 8, name: 'Watermelon', category: 'fruits', price: 55, stock: 10, expiry: 6, image: categoryImages.fruits },
+      { id: 9, name: 'Guava', category: 'fruits', price: 40, stock: 22, expiry: 9, image: categoryImages.fruits },
+      { id: 10, name: 'Kiwi', category: 'fruits', price: 80, stock: 12, expiry: 11, image: categoryImages.fruits },
+
+      { id: 11, name: 'Tomato', category: 'groceries', price: 30, stock: 60, expiry: 6, image: categoryImages.groceries },
+      { id: 12, name: 'Potato', category: 'groceries', price: 20, stock: 100, expiry: 25, image: categoryImages.groceries },
+      { id: 13, name: 'Onion', category: 'groceries', price: 25, stock: 80, expiry: 10, image: categoryImages.groceries },
+      { id: 14, name: 'Rice', category: 'groceries', price: 60, stock: 50, expiry: 90, image: categoryImages.groceries },
+      { id: 15, name: 'Wheat Flour', category: 'groceries', price: 55, stock: 45, expiry: 30, image: categoryImages.groceries },
+      { id: 16, name: 'Lentils', category: 'groceries', price: 85, stock: 30, expiry: 60, image: categoryImages.groceries },
+      { id: 17, name: 'Sugar', category: 'groceries', price: 45, stock: 70, expiry: 100, image: categoryImages.groceries },
+      { id: 18, name: 'Salt', category: 'groceries', price: 20, stock: 90, expiry: 200, image: categoryImages.groceries },
+      { id: 19, name: 'Cooking Oil', category: 'groceries', price: 130, stock: 35, expiry: 120, image: categoryImages.groceries },
+      { id: 20, name: 'Spices Mix', category: 'groceries', price: 150, stock: 40, expiry: 150, image: categoryImages.groceries },
+
+      { id: 21, name: 'Laptop', category: 'electronics', price: 50000, stock: 10, expiry: 365, image: categoryImages.electronics },
+      { id: 22, name: 'Smartphone', category: 'electronics', price: 20000, stock: 15, expiry: 300, image: categoryImages.electronics },
+      { id: 23, name: 'Headphones', category: 'electronics', price: 2500, stock: 25, expiry: 150, image: categoryImages.electronics },
+      { id: 24, name: 'Keyboard', category: 'electronics', price: 1500, stock: 30, expiry: 200, image: categoryImages.electronics },
+      { id: 25, name: 'Monitor', category: 'electronics', price: 12000, stock: 5, expiry: 400, image: categoryImages.electronics },
+      { id: 26, name: 'Power Bank', category: 'electronics', price: 1800, stock: 18, expiry: 270, image: categoryImages.electronics },
+      { id: 27, name: 'Bluetooth Speaker', category: 'electronics', price: 3000, stock: 14, expiry: 290, image: categoryImages.electronics },
+      { id: 28, name: 'Webcam', category: 'electronics', price: 2200, stock: 12, expiry: 310, image: categoryImages.electronics },
+      { id: 29, name: 'Wireless Mouse', category: 'electronics', price: 800, stock: 20, expiry: 180, image: categoryImages.electronics },
+      { id: 30, name: 'Tablet', category: 'electronics', price: 25000, stock: 6, expiry: 350, image: categoryImages.electronics }
+    ];
+
+    let activeProducts = JSON.parse(JSON.stringify(products)); // Deep copy to keep original product data
+    let userPurchases = [];
+
+    function showPanel(panelId) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+      document.getElementById(panelId).classList.add('visible');
+      renderProducts(panelId, 'all');
+    }
+
+    function renderProducts(panel, category) {
+      const grid = document.getElementById(panel + 'Grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      const filtered = category === 'all' ? activeProducts : activeProducts.filter(p => p.category === category);
+
+      filtered.forEach(prod => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+         
+          <h4>${prod.name}</h4>
+          <p>₹${prod.price}</p>
+        `;
+
+        if (panel === 'admin') {
+          card.innerHTML += `
+            <p>Stock: ${prod.stock}</p>
+            <p>Expiry Left: ${prod.expiry} days</p>
+            <label>
+              <input type="checkbox" class="priceCheck" data-id="${prod.id}" ${prod.expiry < 15 ? 'checked' : ''}/> Dynamic Price
+            </label>
+          `;
+          if (prod.category === 'electronics') {
+            card.innerHTML += `<button onclick="recycle(${prod.id})">Recycle</button>`;
+          } else {
+            card.innerHTML += `<button onclick="waste(${prod.id})">Send to Waste</button>`;
+          }
+        } else {
+          card.innerHTML += `
+            <button onclick="buy(${prod.id})">Buy</button>
+          `;
+        }
+        grid.appendChild(card);
+      });
+    }
+
+    function applyDynamicPricing() {
+      const demandMultiplier = parseFloat(document.getElementById('demandMultiplier').value);
+      const expiryThreshold = parseInt(document.getElementById('expiryThreshold').value);
+      const checks = document.querySelectorAll('.priceCheck');
+
+      // Reset prices to original before applying new dynamic changes
+      activeProducts.forEach(item => {
+        const originalProduct = products.find(p => p.id === item.id);
+        if (originalProduct) {
+            item.price = originalProduct.price;
+        }
+      });
+
+      // Apply dynamic pricing based on checked boxes and expiry
+      checks.forEach(chk => {
+        if (chk.checked) {
+          const id = +chk.dataset.id;
+          const item = activeProducts.find(p => p.id === id);
+          if (item && item.expiry < expiryThreshold) {
+            item.price = Math.floor(item.price * demandMultiplier);
+          }
+        }
+      });
+      renderProducts('admin', 'all');
+      renderProducts('user', 'all'); // Also update user panel prices
+    }
+
+    function recycle(id) {
+      const idx = activeProducts.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        document.getElementById('recycleList').innerHTML += `<li>${activeProducts[idx].name} (ID: ${activeProducts[idx].id})</li>`;
+        activeProducts.splice(idx, 1);
+        renderProducts('admin', 'all');
+        renderProducts('user', 'all'); // Update user panel
+      }
+    }
+
+    function waste(id) {
+      const idx = activeProducts.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        document.getElementById('wasteList').innerHTML += `<li>${activeProducts[idx].name} (ID: ${activeProducts[idx].id})</li>`;
+        activeProducts.splice(idx, 1);
+        renderProducts('admin', 'all');
+        renderProducts('user', 'all'); // Update user panel
+      }
+    }
+
+    function buy(id) {
+      const product = activeProducts.find(p => p.id === id);
+      if (product) {
+        if (product.stock > 0) {
+          product.stock--;
+          userPurchases.push(product.name);
+          alert("Thanks for purchasing " + product.name + "!");
+          updateUserPurchases();
+        } else {
+          alert("Sorry, " + product.name + " is out of stock.");
+        }
+      } else {
+        alert("Product not found or already removed.");
+      }
+      renderProducts('user', 'all');
+      renderProducts('admin', 'all'); // Update admin panel stock
+    }
+
+    function updateUserPurchases() {
+      const list = document.getElementById('userPurchases');
+      list.innerHTML = '';
+      userPurchases.forEach(p => {
+        const li = document.createElement('li');
+        li.innerText = p;
+        list.appendChild(li);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById('adminBtn').onclick = () => showPanel('admin');
+      document.getElementById('userBtn').onclick = () => showPanel('user');
+      showPanel('admin'); // Show admin panel by default on load
+    });
+  </script>
+</body>
+</html>
