@@ -12,7 +12,6 @@
 - 📅 **Timestamped Notes** – Auto-save with date & time
 - 🔎 **Sorting & Filtering** – Sort notes by **tag** or **time**
 - 🎨 **Responsive & Beautiful UI** – Fully responsive and mobile-friendly
-- 🌙 **Dark/Light Mode** *(optional extension)*
 
 ---
 
@@ -37,7 +36,6 @@
 - Express.js
 - MongoDB + Mongoose
 - JWT for Auth
-- CORS, dotenv, bcrypt
 
 ---
 
