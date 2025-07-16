@@ -16,10 +16,12 @@
 ---
 
 ## 📸 Screenshots
+## 📸 Screenshots
 
 | Landing Page | Notes Dashboard | Add/Edit Note | 
 |--------------|-----------------|---------------|
-| ![landing](./assets/Landing.png) | ![dashboard](./assets/Notes.png) | ![edit](./assets/AddNote.png) |
+| ![landing](./B/assets/Landing.png) | ![dashboard](./B/assets/Notes.png) | ![edit](./B/assets/AddNote.png) |
+
 
 ---
 
