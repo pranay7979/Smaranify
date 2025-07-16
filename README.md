@@ -20,8 +20,11 @@
 
 
 ![landing](./B/assets/Landing.png) 
+![login](./B/assets/Login.png) 
+![SignUp](./B/assets/Signup.png) 
 ![dashboard](./B/assets/Notes.png) 
 ![edit](./B/assets/AddNote.png) 
+
 
 
 ---
