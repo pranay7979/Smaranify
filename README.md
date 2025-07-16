@@ -19,7 +19,7 @@
 
 | Landing Page | Notes Dashboard | Add/Edit Note | 
 |--------------|-----------------|---------------|
-| ![landing](./components/assets/Landing.png) | ![dashboard](./components/assets/Notes.png) | ![edit](./components/assets/AddNote.png) |
+| ![landing](./assets/Landing.png) | ![dashboard](./assets/Notes.png) | ![edit](./assets/AddNote.png) |
 
 ---
 
