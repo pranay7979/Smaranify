@@ -17,12 +17,12 @@
 
 ## 📸 Screenshots
 
-| Landing Page | Notes Dashboard | Add/Edit Note | 
-|--------------|-----------------|---------------|
-| ![landing](./assets/Landing.png) | ![dashboard](./assets/Notes.png) | ![edit](./assets/AddNote.png) |
-
----
-
+![landing](./B/assets/homepage.png) 
+![login](./B/assets/userlogin.png) 
+![SignUp](./B/assets/usersignup.png) 
+![dashboard](./B/assets/notes.png) 
+![edit](./B/assets/addnotes.png) 
+![about](./B/assets/aboutsection.png)
 
 ## 🧰 Tech Stack
 
