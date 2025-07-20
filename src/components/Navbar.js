@@ -14,14 +14,20 @@ export default function Navbar() {
     localStorage.removeItem('token');
     navigate('/login');
   };
+  
 
   return (
     <>
       <nav className="navbar navbar-expand-lg custom-navbar shadow-sm">
         <div className="container-fluid">
-          <Link className="navbar-brand brand-text" to="/">
-            📝 NoteStack
+          <Link className="navbar-brand d-flex align-items-center logo-link" to="/">
+            <img
+              src = { require('../assets/logo.png') }
+              alt="Smaranify Logo"
+              className="navbar-logo"
+            />
           </Link>
+
           <button
             className="navbar-toggler"
             type="button"
@@ -76,6 +82,40 @@ export default function Navbar() {
       </nav>
 
       <style>{`
+
+      .logo-link {
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+.navbar-logo {
+  height: 55px;
+  margin-right: 10px;
+  width: 160px;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.logo-link:hover .navbar-logo {
+  
+}
+
+.brand-text {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: color 0.3s ease;
+}
+
+.logo-link:hover .brand-text {
+  color: #ffd700; /* golden on hover */
+}
+
       .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='black' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }

@@ -78,20 +78,20 @@ export default function About() {
 
       `}</style>
 
-      <h1 className="about-heading">🚀 Welcome to NoteStack</h1>
+      <h1 className="about-heading">Welcome to Smaranify</h1>
 
       <div className="accordion" id="accordionExample">
         {/* SECTION 1 */}
         <div className="accordion-item mb-3">
           <h2 className="accordion-header">
             <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-              💡 What is NoteStack?
+              💡 What is Smaranify?
             </button>
           </h2>
           <div id="collapseOne" className="accordion-collapse collapse show">
             <div className="accordion-body">
               <ul>
-                <li>NoteStack is your all-in-one digital notebook for effortless note creation and management.</li>
+                <li>Smaranify is your all-in-one digital notebook for effortless note creation and management.</li>
                 <li>Designed to boost productivity by organizing your thoughts, ideas, and tasks in one place.</li>
                 <li>Accessible anywhere, anytime — experience the freedom of structured thinking.</li>
               </ul>
@@ -128,7 +128,7 @@ export default function About() {
           </h2>
           <div id="collapseThree" className="accordion-collapse collapse">
             <div className="accordion-body">
-             NoteStack was proudly developed by :  <strong>  Pranay❤️ </strong>
+            Developed with ❤️ by :  <strong>  Pranay </strong>
             </div>
           </div>
         </div>

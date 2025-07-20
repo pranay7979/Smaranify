@@ -113,27 +113,27 @@ const Landing = () => {
       `}</style>
 
       <div className="hero">
-        <h1>Welcome to NoteStack</h1>
-        <p>Your minimal, secure, and smart place to store thoughts and ideas on the go.</p>
+        <h1>Welcome to Smaranify📝</h1>
+        <p>Let your thoughts and ideas flow, we will smaran them.</p>
         <button className="cta-button" onClick={goToNotes}>📁 My Notes</button>
       </div>
 
       <div className="features">
+         <div className="feature-box">
+          <h3>📝Save Notes in any Language</h3>
+          <p>Make diversity in your way of thoughts</p>
+        </div>
         <div className="feature-box">
           <h3>🎯 Easy Organization</h3>
-          <p>Tag, search, and categorize notes effortlessly with our clean UI.</p>
+          <p>Tag, search, and categorize notes effortlessly in application.</p>
         </div>
         <div className="feature-box">
           <h3>🔐 Privacy First</h3>
           <p>Access notes securely—only when logged in. Your data stays safe.</p>
         </div>
-        <div className="feature-box">
-          <h3>⚡ Instant Sync</h3>
-          <p>Notes appear instantly and stay up-to-date across sessions.</p>
-        </div>
       </div>
 
-      <div className="footer">© {new Date().getFullYear()} NoteStack | Built with 💙 by Pranay</div>
+      <div className="footer">© {new Date().getFullYear()} Smaranify | Built with 💙 by Pranay</div>
     </div>
   );
 };
