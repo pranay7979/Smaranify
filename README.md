@@ -1,6 +1,6 @@
-# 📝 NoteStack - Your Smart Note-Taking Companion
+# 📝 Smaranify - Your Smart Note-Taking Companion
 
-**NoteStack** is a full-featured MERN (MongoDB, Express, React, Node.js) stack application that helps users securely create, edit, sort, and manage their personal and professional notes.
+**Smaranify** is a full-featured MERN (MongoDB, Express, React, Node.js) stack application that helps users securely create, edit, sort, and manage their personal and professional notes.
 
 ---
 
@@ -39,7 +39,6 @@
 - JWT for Auth
 
 ---
-
 
 ## Built with 💖 by:
 
