@@ -11,6 +11,8 @@ const Notes = (props) => {
   const { notes, getNotes, editNote } = context;
 
   const [showAddNote, setShowAddNote] = useState(false);
+  const [sortType, setSortType] = useState("latest");
+
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -167,6 +169,83 @@ const Notes = (props) => {
         </div>
       </div>
 
+     <div className="sort-box mb-4">
+  <label htmlFor="sortSelect" className="sort-label">
+    Sort by:
+  </label>
+  <select
+    id="sortSelect"
+    className="sort-select"
+    value={sortType}
+    onChange={(e) => setSortType(e.target.value)}
+  >
+    <option value="latest">Latest</option>
+    <option value="oldest">Oldest</option>
+    <option value="professional">Professional</option>
+    <option value="personal">Personal</option>
+    <option value="reminder">Reminder</option>
+    <option value="other">Other</option>
+  </select>
+</div>
+<style>{`
+  .sort-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    max-width: 300px;
+    transition: all 0.3s ease;
+  }
+
+  .sort-label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 0;
+  }
+
+  .sort-select {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #333;
+    appearance: none;
+    transition: all 0.2s ease;
+  }
+
+  .sort-select:hover,
+  .sort-select:focus {
+    border-color: #0d6efd;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.2);
+  }
+
+  @media (max-width: 576px) {
+    .sort-box {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .sort-select {
+      width: 100%;
+    }
+  }
+`}</style>
+
+
+
+
+
       {/* Notes Display */}
       <div className="notes-display mt-4">
         <h2 className="mb-4 text-center">📒 Your Notes</h2>
@@ -174,14 +253,32 @@ const Notes = (props) => {
           <div className="text-muted text-center">No notes to display</div>
         ) : (
           <div className="row g-4">
-            {notes.map((note) => (
-              <Noteitem
-                key={note._id}
-                updateNote={updateNote}
-                showAlert={props.showAlert}
-                note={note}
-              />
-            ))}
+            {[...notes]
+              .filter((note) => {
+                const tag = note.tag?.toLowerCase() || "other";
+
+                if (["professional", "personal", "reminder", "other"].includes(sortType)) {
+                  return tag === sortType;
+                }
+                return true; // Show all for latest/oldest
+              })
+              .sort((a, b) => {
+                if (sortType === "latest") {
+                  return new Date(b.time) - new Date(a.time);
+                } else if (sortType === "oldest") {
+                  return new Date(a.time) - new Date(b.time);
+                }
+                return 0; // No sorting for filtered tags
+              })
+              .map((note) => (
+                <Noteitem
+                  key={note._id}
+                  updateNote={updateNote}
+                  showAlert={props.showAlert}
+                  note={note}
+                />
+              ))}
+
           </div>
         )}
       </div>
