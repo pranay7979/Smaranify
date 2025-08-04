@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; // Make sure this CSS file is created
+import { Link } from 'react-router-dom';
+
 
 const Login = (props) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -54,7 +56,7 @@ const Login = (props) => {
           <button type="submit">Login</button>
         </form>
         <p className="signup-link">
-          Don’t have an account? <a href="/signup">Sign up</a>
+          Don’t have an account? <Link to="/signup">Sign up</Link>
         </p>
       </div>
     </div>

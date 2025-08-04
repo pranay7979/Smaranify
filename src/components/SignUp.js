@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Signup.css'; // 👈 Create this CSS file
-
+import { Link } from 'react-router-dom';
 const Signup = (props) => {
   const [credentials, setCredentials] = useState({
     name: "", email: "", password: "", cpassword: ""
@@ -82,7 +82,7 @@ const Signup = (props) => {
           <button type="submit">Sign Up</button>
         </form>
         <p className="login-link">
-          Already have an account? <a href="/login">Log in</a>
+          Already have an account? <Link to="/login">Log in</Link>
         </p>
       </div>
     </div>
