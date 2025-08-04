@@ -21,7 +21,7 @@
 ![landing](./B/assets/homepage.png) 
 ![login](./B/assets/userlogin.png) 
 ![SignUp](./B/assets/usersignup.png) 
-![dashboard](./B/assets/notes.png) 
+![dashboard](./B/assets/Notes.png) 
 ![edit](./B/assets/addnotes.png) 
 ![about](./B/assets/aboutsection.png)
 
