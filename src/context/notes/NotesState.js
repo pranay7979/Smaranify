@@ -6,7 +6,6 @@ const NoteState = (props) => {
   const host = process.env.REACT_APP_BACKEND_URL; // ✅ Use environment variable correctly
   const notesInitial = [];
   const [notes, setNotes] = useState(notesInitial);
-
   // ✅ Get all Notes
   const getNotes = async () => {
     try {
