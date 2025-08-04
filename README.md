@@ -1,17 +1,17 @@
-# 📝 Smaranify - Your Smart Note-Taking Companion
+# Smaranify - Your Smart Note-Taking Companion
 
 **Smaranify** is a full-featured MERN (MongoDB, Express, React, Node.js) stack application that helps users securely create, edit, sort, and manage their personal and professional notes.
 
 ---
 
-## 🚀 Features
+##  Features
 
-- 🔐 **User Authentication** – Signup/Login using JWT
-- 📝 **Create, Edit & Delete Notes**
-- 🧠 **Tag-Based Organization** – Personal, Professional, Reminders, etc.
-- 📅 **Timestamped Notes** – Auto-save with date & time
-- 🔎 **Sorting & Filtering** – Sort notes by **tag** or **time**
-- 🎨 **Responsive & Beautiful UI** – Fully responsive and mobile-friendly
+-  **User Authentication** – Signup/Login using JWT
+-  **Create, Edit & Delete Notes**
+-  **Tag-Based Organization** – Personal, Professional, Reminders, etc.
+-  **Timestamped Notes** – Auto-save with date & time
+-  **Sorting & Filtering** – Sort notes by **tag** or **time**
+-  **Responsive & Beautiful UI** – Fully responsive and mobile-friendly
 
 ---
 
@@ -25,7 +25,7 @@
 ![edit](./B/assets/addnotes.png) 
 ![about](./B/assets/aboutsection.png)
 
-## 🧰 Tech Stack
+## Tech Stack
 
 **Frontend:**
 - React.js
