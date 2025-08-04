@@ -91,9 +91,9 @@ export default function About() {
           <div id="collapseOne" className="accordion-collapse collapse show">
             <div className="accordion-body">
               <ul>
-                <li>Smaranify is your all-in-one digital notebook for effortless note creation and management.</li>
-                <li>Designed to boost productivity by organizing your thoughts, ideas, and tasks in one place.</li>
-                <li>Accessible anywhere, anytime — experience the freedom of structured thinking.</li>
+              <li> Smaranify is inspired by the Sanskrit word <b>“Smaran” (स्मरण)</b> — meaning to remember.</li>
+              <li> Built for thinkers, dreamers, students, professionals everyone. Smaranify helps you turn fleeting thoughts into lasting clarity.</li>
+             <li> Whether it's a sudden idea, a personal journal entry, a class summary, or a work to-do list — Smaranify ensures you never lose a thought worth keeping.</li>
               </ul>
             </div>
           </div>
