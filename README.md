@@ -3,6 +3,7 @@
 **Smaranify** is a full-featured MERN (MongoDB, Express, React, Node.js) stack application that helps users securely create, edit, sort, and manage their personal and professional notes.
 
 ---
+**Live** - visit now - https://smaranify.netlify.app/
 
 ##  Features
 
